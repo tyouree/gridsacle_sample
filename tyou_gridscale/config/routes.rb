@@ -2,11 +2,29 @@ Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
-  #  "root"
+  # Root path
   root 'welcome#index'
 
   #
   resources :login
+
+  #
+  resources :users
+
+  # user master routes
+#  resources :user_master, except: :show do
+#    collection do
+#      get :new_common_user
+#      post :create_common_user
+#      get :index_common_user
+#      delete :destroy_all_common_user
+#    end
+#    member do
+#      get :edit_common_user
+#      patch :update_common_user
+#    end
+#  end
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

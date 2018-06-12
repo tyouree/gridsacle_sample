@@ -19,6 +19,14 @@
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
 
-en:
-  グリッドスケール　株式会社: "Gridscale Inc."
-  hello: "Hello world"
+ja:
+  views:
+    common:
+      company_name: "グリッドスケール　株式会社"
+    user:
+      register: "登録"
+      user_key: "ユーザーキー："
+      user_name: "ユーザー名："
+      user_password: "パスワード："
+      user_email: "メールアドレス："
+

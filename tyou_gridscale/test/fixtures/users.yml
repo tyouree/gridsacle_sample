@@ -2,10 +2,12 @@
 
 one:
   user_key: MyString
-  name: MyString
-  email: MyString
+  user_name: MyString
+  user_email: MyString
+  user_password: MyString
 
 two:
   user_key: MyString
-  name: MyString
-  email: MyString
+  user_name: MyString
+  user_email: MyString
+  user_password: MyString
