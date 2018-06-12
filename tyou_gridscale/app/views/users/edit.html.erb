@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% provide(:title, 'Regist User' ) %>
+</head>
+
+<body>
+<% provide(:screen_code, Constants::REGIST_USER_SCREEN ) %>
+
+<div class="row">
+  <div class="col-md-5 col-md-offset-1">
+    <%= form_for(@user, :url => {:controller => :login, :action => :create}) do |f| %>
+
+        <%= f.label :user_key, t('views.user.user_key'), class: 'red_font' %>
+        <%= f.text_field :user_key, class: 'form-control', maxlength: 16 %>
+
+        <%= f.label :user_email, t('views.user.user_email'), class: 'red_font' %>
+        <%= f.password_field :user_email, class: 'form-control', maxlength: 16 %>
+
+        <%= f.label :user_name, t('views.user.user_name'), class: 'red_font' %>
+        <%= f.text_field :user_name, class: 'form-control', maxlength: 60 %>
+
+        <%= f.label :user_password, t('views.user.user_password'), class: 'red_font' %>
+        <%= f.password_field :user_password, class: 'form-control', maxlength: 16 %>
+        <br />
+        <%= f.submit t('views.user.register'), class: "btn btn-primary" %>
+
+    <% end %>
+  </div>
+</div>
+</body>
+</html>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        // put all javascript here
+
+    });
+</script>
