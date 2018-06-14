@@ -25,6 +25,6 @@ module TyouGridscale
     config.i18n.default_locale = :ja
     config.active_record.default_timezone = :local
 
-    config.active_record.raise_in_transactional_callbacks = true
+#    config.active_record.raise_in_transactional_callbacks = true
   end
 end

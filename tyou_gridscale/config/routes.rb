@@ -11,6 +11,13 @@ Rails.application.routes.draw do
   #
   resources :users
 
+
+  # AJAX
+  get '/ajax_login_regist_email_check', to: 'login#regist_email_check'
+
+
+
+
   # user master routes
 #  resources :user_master, except: :show do
 #    collection do

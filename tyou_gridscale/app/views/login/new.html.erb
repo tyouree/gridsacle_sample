@@ -22,6 +22,13 @@
 
         <%= f.label :user_password, t('views.user.user_password'), class: 'red_font' %>
         <%= f.password_field :user_password, class: 'form-control', maxlength: 16 %>
+
+        <%= f.label :password, t('views.user.user_password'), class: 'red_font' %>
+        <%= f.password_field :password, class: 'form-control', maxlength: 16 %>
+
+        <%= f.label :password_confirmation, t('views.user.user_password'), class: 'red_font' %>
+        <%= f.password_field :password_confirmation, class: 'form-control', maxlength: 16 %>
+
         <br />
         <%= f.submit t('views.user.register'), class: "btn btn-primary" %>
 
@@ -34,6 +41,44 @@
 
 
 <script type="text/javascript">
+    function LoginViewJS() {};
+
+    LoginViewJS.prototype._ajax_checkemail = function() {
+
+        $.ajax({
+            type: "GET",
+            url: "<%= ajax_login_regist_email_check_path %>",
+            dataType: "json",
+            data: {system_code: $('#user_user_email').val()},
+            success: function(data){
+                if (data != null) {
+                    var json = $.parseJSON(JSON.stringify(data));
+                    $.each(json, function (index, value) {
+                        $option = $('<option class="service_ajax_value" >').val(value).text(value);
+                        $("#_service").append($option);
+                    });
+                }
+                if ($('#for_searched_service').val()) {
+                    $('#_service').val($('#for_searched_service').val());
+                    $('#for_searched_service').val('');
+                }
+            },
+            error: function () {
+                alert("Ajax Error");
+            }
+        });
+    };
+
+
+
+    $(function () {
+        var loginViewJS = new LoginViewJS();
+        if ($('#user_user_email').val()) {
+            loginViewJS._ajax_checkemail();
+        }
+
+    });
+
     $(document).ready(function(){
         // put all javascript here
 

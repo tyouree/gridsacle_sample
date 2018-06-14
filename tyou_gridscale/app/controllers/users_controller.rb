@@ -2,7 +2,9 @@ class LoginController < ApplicationController
 
 
   def show
+
     @user = User.find(params[:id])
+
   end
 
   def edit
@@ -15,9 +17,11 @@ class LoginController < ApplicationController
 
     begin
       @user = User.find_by(user_key: param[:user_key])
+
       User.transaction do
         v.update_attributes!(user_email: "touree@me.com")
       end
+
     rescue => e
       if e.message.present?
         throw_msg = e.message
@@ -31,7 +35,6 @@ class LoginController < ApplicationController
     end
 
   end
-
 
   private
   def get_user_param

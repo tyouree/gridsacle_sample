@@ -22,7 +22,7 @@ class LoginController < ApplicationController
 
       flash[:notice] = get_message("notice","101","Regist User Success")
 
-      redirect_to controller: :login, action: :index
+      redirect_to controller: :users, action: :show
 
     rescue => e
       if e.message.present?
@@ -58,12 +58,27 @@ class LoginController < ApplicationController
 
   end
 
+  def regist_email_check
+
+    user_email = User.find_by(:user_email,params[:user_email])
+
+    if !user_email.blank?
+      msg_array = []
+      msg_array[0] = "メールアドレスはとうろくしました。"
+    end
+
+    respond_to do |format|
+      format.html
+      format.json {render json: msg_array}
+    end
+  end
+
 
   private
   def get_user_param
     #params.require(:user).permit(:user_key, :user_name, :user_password)
     #params.require(:user).permit(:user_key, :user_name, :user_password).merge(updated_id: session[:user_name])
-    params.require(:user).permit(:user_key, :user_email, :user_name, :user_password, :password_digest, :password, :password_confirmation).merge(password: params[:user_password], password_confirmation: params[:user_password])
+    params.require(:user).permit(:user_key, :user_email, :user_name, :user_password, :password, :password_confirmation)#.merge(password: params[:user_password], password_confirmation: params[:user_password])
   end
 
 end

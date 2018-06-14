@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -13,14 +12,14 @@
 
 ActiveRecord::Schema.define(version: 20180612074620) do
 
-  create_table "users", force: :cascade do |t|
-    t.string   "user_key",        limit: 255
-    t.string   "user_name",       limit: 255
-    t.string   "user_email",      limit: 255
-    t.string   "user_password",   limit: 255
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
-    t.string   "password_digest", limit: 255
+  create_table "users", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.string "user_key"
+    t.string "user_name"
+    t.string "user_email"
+    t.string "user_password"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "password_digest"
   end
 
 end
