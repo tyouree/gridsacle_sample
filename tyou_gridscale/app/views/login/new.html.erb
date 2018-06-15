@@ -16,7 +16,8 @@
 
         <%= f.label :user_email, t('views.user.user_email'), class: 'red_font' %>
         <%= f.text_field :user_email, class: 'form-control', maxlength: 16 %>
-
+        <%= label :email_repeat, '', class: 'red_font', id: 'email_repeat' %>
+        <br />
         <%= f.label :user_name, t('views.user.user_name'), class: 'red_font' %>
         <%= f.text_field :user_name, class: 'form-control', maxlength: 60 %>
 
@@ -35,12 +36,25 @@
     <% end %>
   </div>
 </div>
+<div id="login_view_notice" class="hidden" title=<%= 'views.common.delete' %>>
+  <p> <%=  'This email is already regiest!' %> </p>
+</div>
 </body>
 </html>
 
 
 
 <script type="text/javascript">
+
+    $(document).ready(function(){
+        var loginViewJS = new LoginViewJS();
+
+        $('#user_user_email').change(function() {
+            loginViewJS._ajax_checkemail();
+        });
+
+    });
+
     function LoginViewJS() {};
 
     LoginViewJS.prototype._ajax_checkemail = function() {
@@ -49,18 +63,27 @@
             type: "GET",
             url: "<%= ajax_login_regist_email_check_path %>",
             dataType: "json",
-            data: {system_code: $('#user_user_email').val()},
-            success: function(data){
+            data: {user_email: $('#user_user_email').val()},
+            success: function(data) {
                 if (data != null) {
                     var json = $.parseJSON(JSON.stringify(data));
-                    $.each(json, function (index, value) {
-                        $option = $('<option class="service_ajax_value" >').val(value).text(value);
-                        $("#_service").append($option);
-                    });
-                }
-                if ($('#for_searched_service').val()) {
-                    $('#_service').val($('#for_searched_service').val());
-                    $('#for_searched_service').val('');
+                    if (json[0] == 0) {
+                        $("#login_view_notice").removeClass("hidden");
+                        $('#login_view_notice').dialog({
+                            resizable: false,
+                            height: "auto",
+                            width: 400,
+                            modal: true,
+                            buttons: {
+                                OK: function () {
+                                    $(this).dialog("close");
+                                }
+                            }
+                        });
+                        $("#email_repeat").html(json[1]);
+                    } else {
+                        $("#email_repeat").val('');
+                    }
                 }
             },
             error: function () {
@@ -69,18 +92,4 @@
         });
     };
 
-
-
-    $(function () {
-        var loginViewJS = new LoginViewJS();
-        if ($('#user_user_email').val()) {
-            loginViewJS._ajax_checkemail();
-        }
-
-    });
-
-    $(document).ready(function(){
-        // put all javascript here
-
-    });
 </script>

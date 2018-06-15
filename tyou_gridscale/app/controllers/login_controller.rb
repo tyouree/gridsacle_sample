@@ -60,17 +60,23 @@ class LoginController < ApplicationController
 
   def regist_email_check
 
-    user_email = User.find_by(:user_email,params[:user_email])
+    user_email = User.find_by(user_email: params[:user_email])
 
+    msg_array = []
     if !user_email.blank?
-      msg_array = []
-      msg_array[0] = "メールアドレスはとうろくしました。"
+      msg_array[0] = 0
+      msg_array[1] = "メールアドレスはとうろくしました。"
     end
 
     respond_to do |format|
       format.html
       format.json {render json: msg_array}
     end
+
+  rescue => e
+
+    logger.error "regist_email_check: ==> " + e.to_s
+
   end
 
 
